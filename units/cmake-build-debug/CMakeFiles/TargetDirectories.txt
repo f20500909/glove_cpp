@@ -1,3 +1,0 @@
-/media/wh/工作/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/units/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/wh/工作/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/units/cmake-build-debug/CMakeFiles/glove.dir
-/media/wh/工作/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/units/cmake-build-debug/CMakeFiles/edit_cache.dir

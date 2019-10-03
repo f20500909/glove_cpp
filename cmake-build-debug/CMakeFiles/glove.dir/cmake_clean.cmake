@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/glove.dir/src/cooccur.cpp.o"
   "CMakeFiles/glove.dir/src/glove.cpp.o"
-  "CMakeFiles/glove.dir/src/main.cpp.o"
+  "CMakeFiles/glove.dir/src/glove_main.cpp.o"
   "CMakeFiles/glove.dir/src/priority_queue.cpp.o"
   "CMakeFiles/glove.dir/src/train.cpp.o"
   "CMakeFiles/glove.dir/src/vocabulary.cpp.o"

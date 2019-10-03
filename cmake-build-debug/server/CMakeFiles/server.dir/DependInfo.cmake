@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/data/Data.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/CMakeFiles/server.dir/data/Data.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Buffer.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/CMakeFiles/server.dir/src/Buffer.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Channel.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/CMakeFiles/server.dir/src/Channel.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Connection.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/CMakeFiles/server.dir/src/Connection.cpp.o"
@@ -22,6 +23,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src"
   "../src/base"
   "../server/src"
+  "../server/data"
   )
 
 # Targets to which this target links.

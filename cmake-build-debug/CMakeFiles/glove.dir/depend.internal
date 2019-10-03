@@ -47,7 +47,7 @@ CMakeFiles/glove.dir/src/glove.cpp.o
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove.h
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/train.h
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/vocabulary.h
-CMakeFiles/glove.dir/src/main.cpp.o
+CMakeFiles/glove.dir/src/glove_main.cpp.o
  ../src/base/declare.h
  ../src/base/densematrix.h
  ../src/base/matrix.h
@@ -56,7 +56,7 @@ CMakeFiles/glove.dir/src/main.cpp.o
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/args.h
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/cooccur.h
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove.h
- /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/main.cpp
+ /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove_main.cpp
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/train.h
  /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/vocabulary.h
 CMakeFiles/glove.dir/src/priority_queue.cpp.o

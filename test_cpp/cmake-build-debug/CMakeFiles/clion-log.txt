@@ -1,4 +1,0 @@
-/home/wh/Documents/software/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/test_cpp
--- Configuring done
--- Generating done
--- Build files have been written to: /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/test_cpp/cmake-build-debug

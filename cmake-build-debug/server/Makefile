@@ -125,6 +125,33 @@ server/fast:
 	cd /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug && $(MAKE) -f server/CMakeFiles/server.dir/build.make server/CMakeFiles/server.dir/build
 .PHONY : server/fast
 
+data/Data.o: data/Data.cpp.o
+
+.PHONY : data/Data.o
+
+# target to build an object file
+data/Data.cpp.o:
+	cd /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug && $(MAKE) -f server/CMakeFiles/server.dir/build.make server/CMakeFiles/server.dir/data/Data.cpp.o
+.PHONY : data/Data.cpp.o
+
+data/Data.i: data/Data.cpp.i
+
+.PHONY : data/Data.i
+
+# target to preprocess a source file
+data/Data.cpp.i:
+	cd /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug && $(MAKE) -f server/CMakeFiles/server.dir/build.make server/CMakeFiles/server.dir/data/Data.cpp.i
+.PHONY : data/Data.cpp.i
+
+data/Data.s: data/Data.cpp.s
+
+.PHONY : data/Data.s
+
+# target to generate assembly for a file
+data/Data.cpp.s:
+	cd /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug && $(MAKE) -f server/CMakeFiles/server.dir/build.make server/CMakeFiles/server.dir/data/Data.cpp.s
+.PHONY : data/Data.cpp.s
+
 src/Buffer.o: src/Buffer.cpp.o
 
 .PHONY : src/Buffer.o
@@ -404,6 +431,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... server"
 	@echo "... edit_cache"
+	@echo "... data/Data.o"
+	@echo "... data/Data.i"
+	@echo "... data/Data.s"
 	@echo "... src/Buffer.o"
 	@echo "... src/Buffer.i"
 	@echo "... src/Buffer.s"

@@ -83,18 +83,18 @@ CMakeFiles/glove.dir/src/glove.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/glove.dir/src/glove.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove.cpp -o CMakeFiles/glove.dir/src/glove.cpp.s
 
-CMakeFiles/glove.dir/src/main.cpp.o: CMakeFiles/glove.dir/flags.make
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/glove.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/glove.dir/src/main.cpp.o -c /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/main.cpp
+CMakeFiles/glove.dir/src/glove_main.cpp.o: CMakeFiles/glove.dir/flags.make
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/glove_main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/glove.dir/src/glove_main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/glove.dir/src/glove_main.cpp.o -c /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove_main.cpp
 
-CMakeFiles/glove.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/glove.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/main.cpp > CMakeFiles/glove.dir/src/main.cpp.i
+CMakeFiles/glove.dir/src/glove_main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/glove.dir/src/glove_main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove_main.cpp > CMakeFiles/glove.dir/src/glove_main.cpp.i
 
-CMakeFiles/glove.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/glove.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/main.cpp -o CMakeFiles/glove.dir/src/main.cpp.s
+CMakeFiles/glove.dir/src/glove_main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/glove.dir/src/glove_main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove_main.cpp -o CMakeFiles/glove.dir/src/glove_main.cpp.s
 
 CMakeFiles/glove.dir/src/priority_queue.cpp.o: CMakeFiles/glove.dir/flags.make
 CMakeFiles/glove.dir/src/priority_queue.cpp.o: ../src/priority_queue.cpp
@@ -217,7 +217,7 @@ CMakeFiles/glove.dir/src/base/vector.cpp.s: cmake_force
 glove_OBJECTS = \
 "CMakeFiles/glove.dir/src/cooccur.cpp.o" \
 "CMakeFiles/glove.dir/src/glove.cpp.o" \
-"CMakeFiles/glove.dir/src/main.cpp.o" \
+"CMakeFiles/glove.dir/src/glove_main.cpp.o" \
 "CMakeFiles/glove.dir/src/priority_queue.cpp.o" \
 "CMakeFiles/glove.dir/src/train.cpp.o" \
 "CMakeFiles/glove.dir/src/vocabulary.cpp.o" \
@@ -233,7 +233,7 @@ glove_EXTERNAL_OBJECTS =
 
 ../build/glove: CMakeFiles/glove.dir/src/cooccur.cpp.o
 ../build/glove: CMakeFiles/glove.dir/src/glove.cpp.o
-../build/glove: CMakeFiles/glove.dir/src/main.cpp.o
+../build/glove: CMakeFiles/glove.dir/src/glove_main.cpp.o
 ../build/glove: CMakeFiles/glove.dir/src/priority_queue.cpp.o
 ../build/glove: CMakeFiles/glove.dir/src/train.cpp.o
 ../build/glove: CMakeFiles/glove.dir/src/vocabulary.cpp.o

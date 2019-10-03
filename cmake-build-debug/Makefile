@@ -352,32 +352,32 @@ src/glove.cpp.s:
 	$(MAKE) -f CMakeFiles/glove.dir/build.make CMakeFiles/glove.dir/src/glove.cpp.s
 .PHONY : src/glove.cpp.s
 
-src/main.o: src/main.cpp.o
+src/glove_main.o: src/glove_main.cpp.o
 
-.PHONY : src/main.o
+.PHONY : src/glove_main.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/glove.dir/build.make CMakeFiles/glove.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/glove_main.cpp.o:
+	$(MAKE) -f CMakeFiles/glove.dir/build.make CMakeFiles/glove.dir/src/glove_main.cpp.o
+.PHONY : src/glove_main.cpp.o
 
-src/main.i: src/main.cpp.i
+src/glove_main.i: src/glove_main.cpp.i
 
-.PHONY : src/main.i
+.PHONY : src/glove_main.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/glove.dir/build.make CMakeFiles/glove.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/glove_main.cpp.i:
+	$(MAKE) -f CMakeFiles/glove.dir/build.make CMakeFiles/glove.dir/src/glove_main.cpp.i
+.PHONY : src/glove_main.cpp.i
 
-src/main.s: src/main.cpp.s
+src/glove_main.s: src/glove_main.cpp.s
 
-.PHONY : src/main.s
+.PHONY : src/glove_main.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/glove.dir/build.make CMakeFiles/glove.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/glove_main.cpp.s:
+	$(MAKE) -f CMakeFiles/glove.dir/build.make CMakeFiles/glove.dir/src/glove_main.cpp.s
+.PHONY : src/glove_main.cpp.s
 
 src/priority_queue.o: src/priority_queue.cpp.o
 
@@ -494,9 +494,9 @@ help:
 	@echo "... src/glove.o"
 	@echo "... src/glove.i"
 	@echo "... src/glove.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/glove_main.o"
+	@echo "... src/glove_main.i"
+	@echo "... src/glove_main.s"
 	@echo "... src/priority_queue.o"
 	@echo "... src/priority_queue.i"
 	@echo "... src/priority_queue.s"

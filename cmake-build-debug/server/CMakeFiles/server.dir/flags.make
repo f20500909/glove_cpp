@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++14 -march=native -O3 -pthread -lpthread -Werror  -std=c++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src -I/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base -I/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src 
+CXX_INCLUDES = -I/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src -I/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base -I/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src -I/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/data 
 

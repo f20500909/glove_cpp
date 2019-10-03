@@ -47,17 +47,17 @@ CMakeFiles/glove.dir/src/glove.cpp.o: ../src/glove.h
 CMakeFiles/glove.dir/src/glove.cpp.o: ../src/train.h
 CMakeFiles/glove.dir/src/glove.cpp.o: ../src/vocabulary.h
 
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/base/declare.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/base/densematrix.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/base/matrix.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/base/utils.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/base/vector.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/base/args.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/cooccur.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/glove.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/main.cpp
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/train.h
-CMakeFiles/glove.dir/src/main.cpp.o: ../src/vocabulary.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/base/declare.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/base/densematrix.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/base/matrix.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/base/utils.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/base/vector.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/base/args.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/cooccur.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/glove.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/glove_main.cpp
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/train.h
+CMakeFiles/glove.dir/src/glove_main.cpp.o: ../src/vocabulary.h
 
 CMakeFiles/glove.dir/src/priority_queue.cpp.o: ../src/base/declare.h
 CMakeFiles/glove.dir/src/priority_queue.cpp.o: ../src/priority_queue.cpp

@@ -12,7 +12,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/vector.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/base/vector.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/cooccur.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/cooccur.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/glove.cpp.o"
-  "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/main.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/main.cpp.o"
+  "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove_main.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/glove_main.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/priority_queue.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/priority_queue.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/train.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/train.cpp.o"
   "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/vocabulary.cpp" "/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/CMakeFiles/glove.dir/src/vocabulary.cpp.o"

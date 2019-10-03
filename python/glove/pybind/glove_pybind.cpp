@@ -5,8 +5,8 @@
 #include<pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <Python.h>
-#include "train.h"
-#include "glove.h"
+#include "glove/train.h"
+#include "glove/glove.h"
 //#include "utils.h"
 
 namespace py = pybind11;

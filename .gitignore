@@ -1,3 +1,6 @@
 /server/temp
 /cmkae-build-debug
 /test_cpp
+/.idea
+/test
+/build

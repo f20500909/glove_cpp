@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="glove"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\..\..\..\usr\local\share\cmake\;CMake Files\..\..\..\..\..\..\..\usr\local\share\cmake\pybind11\;CMake Files\server\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glove">
+				<Option output="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/build/glove" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="../build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src"/>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 glove"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glove/fast">
+				<Option output="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/build/glove" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="../build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src"/>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 glove/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server">
+				<Option output="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/build/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="../build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src"/>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base"/>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 server"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server/fast">
+				<Option output="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/build/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="../build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src"/>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base"/>
+					<Add directory="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 server/fast"/>
+					<CompileFile command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j20 -f &quot;/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/cmake-build-debug/server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Buffer.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Buffer.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Channel.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Channel.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Connection.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/Connection.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/EPoller.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/EPoller.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/EventLoop.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/EventLoop.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/TcpConnection.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/TcpConnection.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/TcpServer.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/TcpServer.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/ThreadPool.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/ThreadPool.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/WebServer.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/unit.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/src/unit.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/args.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/args.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/declare.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/declare.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/densematrix.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/densematrix.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/matrix.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/matrix.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/utils.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/utils.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/vector.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/base/vector.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/cooccur.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/cooccur.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/main.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/priority_queue.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/priority_queue.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/train.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/train.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/vocabulary.cpp">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/vocabulary.h">
+			<Option target="glove"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/../../../../../../../usr/local/share/cmake/pybind11/FindPythonLibsNew.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\local\share\cmake\pybind11\"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/../../../../../../../usr/local/share/cmake/pybind11/pybind11Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\local\share\cmake\pybind11\"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/../../../../../../../usr/local/share/cmake/pybind11/pybind11ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\local\share\cmake\pybind11\"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/../../../../../../../usr/local/share/cmake/pybind11/pybind11Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\local\share\cmake\pybind11\"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/../../../../../../../usr/local/share/cmake/pybind11/pybind11Tools.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\local\share\cmake\pybind11\"/>
+		</Unit>
+		<Unit filename="/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\server\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

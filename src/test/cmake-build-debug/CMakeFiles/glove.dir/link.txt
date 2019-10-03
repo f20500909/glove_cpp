@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++14 -march=native -O3 -pthread -lpthread -Werror  -g  -rdynamic CMakeFiles/glove.dir/info.cpp.o  -o ../build/glove -lpthread 

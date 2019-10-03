@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/smuduoChatServer_Wh/CppTest/testLockGuard.cpp
+set
+-
+random
+-
+mutex
+-
+iostream
+-
+thread
+-
+

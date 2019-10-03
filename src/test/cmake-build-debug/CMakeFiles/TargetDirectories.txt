@@ -1,0 +1,3 @@
+/media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/src/test/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/src/test/cmake-build-debug/CMakeFiles/glove.dir
+/media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/src/test/cmake-build-debug/CMakeFiles/edit_cache.dir

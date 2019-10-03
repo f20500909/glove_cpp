@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/test_cpp/Buffer.cpp
+memory.h
+-
+iostream
+-
+string.h
+-
+assert.h
+-
+stdio.h
+-
+

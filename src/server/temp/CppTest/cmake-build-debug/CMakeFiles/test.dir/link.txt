@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11 -march=native -O3 -pthread -lpthread -g  -rdynamic CMakeFiles/test.dir/testLockGuard.cpp.o  -o test 

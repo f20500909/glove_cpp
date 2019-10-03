@@ -1,3 +1,0 @@
-/media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/smuduoChatServer_Wh/CppTest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/smuduoChatServer_Wh/CppTest/cmake-build-debug/CMakeFiles/test.dir
-/media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/smuduoChatServer_Wh/CppTest/cmake-build-debug/CMakeFiles/edit_cache.dir

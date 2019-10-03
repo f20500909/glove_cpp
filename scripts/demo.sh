@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
-
-
-
-
-#下载文件
-if [ ! -e text8 ]; then
+#如果data目录下面没有text8的训练文件,则下载文件
+if [ ! -e ../data/text8 ]; then
   if hash wget 2>/dev/null; then
     wget http://mattmahoney.net/dc/text8.zip
   else
@@ -15,15 +11,14 @@ if [ ! -e text8 ]; then
 #  rm text8.zip
 fi
 
-cd ../build
-rm -rf *
+mkdir -p "../build"
 
-cmake ../
-make
+#可执行文件不存在,则进行编译
+if [ ! -f  "../build/glove" ]; then
+    ./build.sh
+fi
 
 
-#新建临时的log储存目录
-#mkdir -p "log"
 
 input_file="small_text"
 #input_file="text8"

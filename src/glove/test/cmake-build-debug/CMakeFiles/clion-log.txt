@@ -1,7 +1,0 @@
-/home/wh/Documents/software/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/src/test
--- Configuring done
-CMake Error at CMakeLists.txt:16 (add_executable):
-  No SOURCES given to target: glove
-
-
--- Build files have been written to: /media/wh/work/career/blog/code/clion_dir/bolg/PROJECT/glove_cpp/src/test/cmake-build-debug

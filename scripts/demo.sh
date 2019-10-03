@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#build
-
 
 
 
@@ -17,15 +15,15 @@ if [ ! -e text8 ]; then
 #  rm text8.zip
 fi
 
-#cd ../build
-#rm -rf *
-#
-#cmake ../
-#make
+cd ../build
+rm -rf *
+
+cmake ../
+make
 
 
 #新建临时的log储存目录
-mkdir -p "log"
+#mkdir -p "log"
 
 input_file="small_text"
 #input_file="text8"

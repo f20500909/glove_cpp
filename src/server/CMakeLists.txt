@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../../build)
+
 aux_source_directory(. SERVER_DIR)
 
 include_directories(src)

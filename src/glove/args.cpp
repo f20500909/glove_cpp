@@ -50,8 +50,7 @@ void Args::printHelp() {
               << "  -epoch                    train epoch [" << epoch << "]\n"
               << "  -threads                  max length of char ngram [" << threads << "]\n"
               << "  -memory_limit             max length of char ngram [" << memory_limit << "]\n"
-              << "  -lr                       max length of char ngram [" << lr << "]\n"
-              << "  -keep_case                max length of char ngram [" << keep_case << "]\n";
+              << "  -lr                       max length of char ngram [" << lr << "]\n";
 }
 
 

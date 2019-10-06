@@ -12,7 +12,7 @@ public:
     }
 
     static void onMessage(const SP_TcpConnection &conn, Buffer *buf) {
-        conn->send("MyServer");
+        conn->send(buf->readAll());
     }
 
     static void onWriteComplete(const SP_TcpConnection &conn) {
@@ -31,7 +31,8 @@ private:
 
 };
 
-std::string MyServer::g_ServerMsg = "HTTP/1.0 200 OK\r\nTcpServer: Boyfriend TcpServer\r\n\r\nEverything is OK!";
+std::string data=std::string(1000,'c');
+std::string MyServer::g_ServerMsg = "HTTP/1.0 200 OK\r\nTcpServer: Boyfriend TcpServer\r\n\r\nEverything is OK!"+data;
 
 int main() {
     EventLoop mainLoop;

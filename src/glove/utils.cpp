@@ -1,6 +1,7 @@
 #include <algorithm>
 #include "utils.h"
 
+
 std::string lower(const std::string &str) {
     std::string res(str);
     std::transform(str.begin(), str.end(), res.begin(), ::tolower);

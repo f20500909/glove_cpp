@@ -7,7 +7,7 @@
 
 class Args {
 public:
-    std::string input_file = "small_text";
+    std::string input_file = "../data/small_text";
 //    std::string log_dir = "log/";
 //    std::string vocab_file = "vocab.txt";
 //    std::string temp_file = "temp.bin_";
@@ -18,12 +18,11 @@ public:
     unsigned long min_count = 1;
     unsigned long window = 10;
     unsigned long embed_size = 2;
-    unsigned long epoch = 1;
+    unsigned long epoch = 4;
     int threads = 40;
     int memory_limit = 1;
 
     double lr = 0.05;
-    bool keep_case = false;
 
     void printHelp();
 

@@ -53,6 +53,7 @@ public:
     const char* peek() const { //peek即找到第一个可写的字符
         return begin() + readIdx_;
     }
+
     char* beginWrite() {
         return begin() + writeIdx_;
     }

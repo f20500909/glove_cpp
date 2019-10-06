@@ -16,20 +16,21 @@ void TcpConnection::send(const std::string &message) {
 
 void TcpConnection::send(std::shared_ptr<Buffer> buf) {
         sendInLoopBuffer(buf);
-        buf->retrieveAll();
+//        TODO: retrieveAll ...
+//        buf->retrieveAll();
 }
 
 
 void TcpConnection::sendInLoopBuffer(std::shared_ptr<Buffer> buf) {
     std::shared_ptr<Buffer> buftmp = buf;
-    sendInLoop(buf->peek(), buf->readableBytes());
+    sendInLoop(buf->peek(), buf->readableSize());
     buf.reset();
 }
 
 void TcpConnection::sendInLoop(const void *data, size_t len) {
     ssize_t nwrote = 0;
     size_t remaining = len;
-    if (!channel_->isWriting() & (outputBuffer_.readableBytes() == 0)) {
+    if (!channel_->isWriting() & (outputBuffer_.readableSize() == 0)) {
         nwrote = ::write(channel_->fd(), static_cast<const char *>(data), len);
         if (nwrote >= 0) {
             remaining = len - nwrote;
@@ -64,10 +65,10 @@ void TcpConnection::handleRead() {
 
 void TcpConnection::handleWrite() {
     if (channel_->isWriting()) {
-        ssize_t n = ::write(channel_->fd(), outputBuffer_.peek(), outputBuffer_.readableBytes());
+        ssize_t n = ::write(channel_->fd(), outputBuffer_.peek(), outputBuffer_.readableSize());
         if (n > 0) {
-            outputBuffer_.retrieve(n);
-            if (outputBuffer_.readableBytes() == 0) {
+//            outputBuffer_.retrieve(n);
+            if (outputBuffer_.readableSize() == 0) {
                 channel_->disableWriting();
                 if (writeCompleteCallback_) {
                     loop_->queueInLoop(std::bind(writeCompleteCallback_, shared_from_this()));

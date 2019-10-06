@@ -5,6 +5,10 @@
 #include <sstream>
 #include <vector>
 
+#include <base/trace.h>
+
+
+
 std::string lower(const std::string &str);
 
 
@@ -50,6 +54,12 @@ namespace file {
 namespace untils{
     void seek(std::ifstream &ifs, int pos) ;
     int size(std::ifstream &ifs) ;
+
+
+
+
+
+
 }
 
 class Timer {

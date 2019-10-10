@@ -10,8 +10,11 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <cstring>
+#include <string>
+#include <vector>
 #include <netinet/in.h>
 #include <sys/epoll.h>
+#include <sys/eventfd.h>
 
 class noncopyable {
 public:
@@ -26,6 +29,11 @@ protected:
 };
 
 namespace unit {
+
+
+    int createEventfd();
+
+    void SplitString(const std::string &s, std::vector<std::string> &v, const std::string &c);
 
     int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);
 

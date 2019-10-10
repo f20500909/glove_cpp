@@ -2,13 +2,12 @@
 
 Data::Data() {
 	init();
-
 }
 
 
 void Data::init() {
-	std::ifstream vocabFile("../data/vocab.txt");
-	std::ifstream wordvecFile("../data/wordvec.txt");
+	std::ifstream vocabFile("log/vocab.txt");
+	std::ifstream wordvecFile("log/wordvec.txt");
 
 	assert(vocabFile);
 	assert(wordvecFile);
@@ -22,9 +21,14 @@ void Data::init() {
 }
 
 std::string Data::getWordvec(std::string &str) {
-	return m[str];
+    try{
+		return m.at(str);
+    }catch (std::out_of_range& error){
+    	return "nullptr";
+    }
 }
 
 Data::~Data() {
 
 }
+

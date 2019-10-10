@@ -14,7 +14,7 @@ import os
 import subprocess
 import platform
 
-__version__ = '0.1.8'
+__version__ = '0.1.9'
 SRC = "src"
 
 
@@ -58,7 +58,7 @@ src_cpp = list(
 
 print(get_pybind_include())
 print(get_pybind_include(user=True))
-src_cpp.append('python/glove/pybind/glove_pybind.cpp')
+src_cpp.append('src/glove/py_bind/glove_pybind.cpp')
 print(src_cpp)
 ext_modules = [
     Extension(

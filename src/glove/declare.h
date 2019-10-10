@@ -27,7 +27,7 @@ using CRECID=struct CoRec_id {
     uint32_t i;
     uint32_t j;
     double val;
-    int id;
+    int fileId;
     bool operator>(const CoRec_id& rec){
         if (( this->i - rec.i) != 0) return this->i > rec.i;
         else return this->j > rec.j;

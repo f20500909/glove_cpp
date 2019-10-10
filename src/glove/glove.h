@@ -3,12 +3,8 @@
 
 #include <iostream>
 #include <vector>
-
-#include "utils.h"
 #include "vocabulary.h"
-#include "cooccur.h"
 #include "train.h"
-#include "base/args.h"
 
 class Glove : public Args {
 public:
@@ -21,11 +17,11 @@ public:
     Glove(std::string input_file
         ,  unsigned long long vocab_size, unsigned long long max_size,
           unsigned long min_count, unsigned long window, unsigned long embed_size, unsigned long epoch,
-          int threads, double lr, bool keep_case);
+          int threads, double lr);
 
     Glove(std::vector<std::string> args_cmd);
 
-    void train(std::string input_file);
+    void run(std::string input_file);
 
     void load( std::string wordvec_file, std::string meta_file);
     void to_txt();

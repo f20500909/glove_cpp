@@ -2,8 +2,9 @@
 #define GLOVE_PRIORITY_QUEUE_H
 
 
-#include <base/declare.h>
+#include "declare.h"
 
+//小顶堆
 class priority_queue {
 public:
     priority_queue(int nums);
@@ -11,7 +12,7 @@ public:
     inline CRECID top() { return _data[0]; }
 
 /* Swap two entries of priority queue */
-    void swap_entry(int i, int j);
+    void swap(int i, int j);
 
 /* Insert entry into priority queue */
     void insert(CRECID &_new, int size);

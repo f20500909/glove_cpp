@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -std=c++14 -march=native -O3 -pthread -lpthread -Werror  -g  -shared  -o ../python/glove/glove_pybind.cpython-35m-x86_64-linux-gnu.so CMakeFiles/glove_pybind.dir/py_bind/glove_pybind.cpp.o 

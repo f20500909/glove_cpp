@@ -49,7 +49,6 @@ void TcpConnection::sendInLoop(const void *data, size_t len) {
 }
 
 void TcpConnection::handleRead() {
-    printf("TcpConnection::handleRead\n");
     int savedErrno = 0;
     ssize_t n = inputBuffer_.readFd(channel_->fd(), &savedErrno);
     if (n > 0) {
@@ -100,7 +99,8 @@ void TcpConnection::connectDestroyed() {
 }
 
 void TcpConnection::shutdown() {
-    loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
+//    loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
+    shutdownInLoop();
 }
 
 void TcpConnection::shutdownInLoop() {

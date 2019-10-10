@@ -1,0 +1,4 @@
+/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove/cmake-build-debug/CMakeFiles/glove_pybind.dir
+/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/glove/cmake-build-debug/CMakeFiles/glove.dir

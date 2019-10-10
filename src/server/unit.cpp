@@ -4,6 +4,21 @@
 namespace unit {
 
 
+    void SplitString(const std::string &s, std::vector<std::string> &v, const std::string &c) {
+        std::string::size_type pos1, pos2;
+        pos2 = s.find(c);
+        pos1 = 0;
+        while (std::string::npos != pos2) {
+            v.push_back(s.substr(pos1, pos2 - pos1));
+
+            pos1 = pos2 + c.size();
+            pos2 = s.find(c, pos1);
+        }
+        if (pos1 != s.length())
+            v.push_back(s.substr(pos1));
+    }
+
+
     int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout) {
         int numEvents = ::epoll_wait(epfd, events, maxevents, timeout);
         if (numEvents > 0) {
@@ -12,8 +27,8 @@ namespace unit {
             exit(0);
 
         } else {
-            perror(" EPoller::poll() error ...\n");
-            exit(-1);
+            perror("numEvents < 0    EPoller::poll() error ...\n");
+//            exit(-1);
         }
         return numEvents;
     }
@@ -168,6 +183,15 @@ namespace unit {
     int tid() {
         static int t_cachedTid =static_cast<pid_t>(syscall(SYS_gettid));
         return t_cachedTid;
+    }
+
+    int createEventfd() {
+        int evtfd = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
+        if (evtfd < 0) {
+            printf("LOG_SYSERR: Failed in eventfd");
+            exit(-1);
+        }
+        return evtfd;
     }
 
 

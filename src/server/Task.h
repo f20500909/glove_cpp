@@ -36,12 +36,16 @@ Task<T>::~Task() {
 template <class T>
 T *Task<T>::startLoop() {
 	std::function<void()> threadFunc = std::bind(&Task::startSubTask, this);
-	thread_ = std::move(std::thread(threadFunc));
+
+	//是否用std::move()?
+	thread_ = std::thread(threadFunc);
 	{
+
 		std::unique_lock<std::mutex> locker(mutex_);
 		cond_.wait(locker,
-				[=]() { return loop_ != nullptr; }
+				[&]() { return loop_ != nullptr; }
 		);
+
 	}
 	return loop_;
 }

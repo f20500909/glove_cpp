@@ -6,7 +6,7 @@
 
 #include "utils.h"
 #include "vector.h"
-#include "base/args.h"
+#include "args.h"
 #include "densematrix.h"
 #include "cooccur.h"
 #include "vocabulary.h"
@@ -44,7 +44,6 @@ private:
 
     uint32_t vocab_size;
     unsigned long embed_size;
-    double alpha;
     double threshold;
     std::shared_ptr<DenseMatrix> W1;
     std::shared_ptr<DenseMatrix> W2;

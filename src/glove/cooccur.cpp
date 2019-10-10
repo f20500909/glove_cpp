@@ -1,6 +1,6 @@
 #include "cooccur.h"
 #include "priority_queue.h"
-#include "base/info.h"
+
 
 //生成共现三元组的主程序
 //如果使用二维矩阵储存共现矩阵,则二维矩阵的左上角稠密(高频词共现次数较多),而右下角稀疏(低频词共现次数较少),二维矩阵总体来说太过稀疏
@@ -24,24 +24,26 @@ void CoMat::build(const Vocabulary &vocab) {
     std::ifstream input(input_file);
     assert(input);
 //    先读取一个词汇
+    long long lowCount=0;
+
     input >> context;
 
-    exists = lookup(center, id, vocab);
+    exists = false;
     ids.push_back(exists ? id : 0);
     flags.push_back(exists);
 
-    std::ofstream foverflow("log/temp.bin_" + std::to_string(fidCounter));
+    std::ofstream foverflow(tempFileName + std::to_string(fidCounter));
 
-    overflow_length = 100000;
+    overflow_length = 10000;
 
     while (!input.eof()) {
         //  将低频词汇分成多个文件写入
-        if (ind >= overflow_length) {
+        if (lowCount >= overflow_length) {
 //            如果文件满了,排序,重新打开一个文件写入,fidCounter自增以区分文件
-            std::ofstream foverflow("log/temp.bin_" + std::to_string(fidCounter), std::ios::out | std::ios::binary);
+            std::ofstream foverflow(tempFileName + std::to_string(fidCounter), std::ios::out | std::ios::binary);
             write_chunk(low_cooccur, foverflow);
             fidCounter++;
-            ind = 0;
+            lowCount = 0;
         }
 
         input >> center;
@@ -71,7 +73,7 @@ void CoMat::build(const Vocabulary &vocab) {
                 } else {
                     //如果为共现次数较少的三元组
                     low_cooccur.emplace_back(id, ids[i], weight);
-                    ind++;
+                    lowCount++;
                 }
                 //去掉了镜像的选项
                 //TODO :加上镜像提取共现矩阵的功能,最好对比一便加上镜像和不加上镜像效果差了多少
@@ -84,6 +86,7 @@ void CoMat::build(const Vocabulary &vocab) {
     write_chunk(low_cooccur, foverflow);
 
     //将高频词写入文件,也只有一个
+    //TODO 这块的逻辑好像有点问题，高频部分和低频部分好像公用的是一个文件，不知道有没有问题，先放着再说
     write_high_cooccur(bigram_table);
 
     //合并临时文件
@@ -92,23 +95,26 @@ void CoMat::build(const Vocabulary &vocab) {
     return;
 }
 
+//写入一个临时文件
 void CoMat::write_chunk(std::list<CoRec> &co, std::ofstream &out) {
     co.sort();
     while (!co.empty()) {
-        CoRec current = std::move(co.front());
+        CoRec cur = std::move(co.front());
         co.pop_front();
-        if (current == co.back()) {
-            co.back() += current;
+        //如果是重复的，将权重相加
+        if (cur == co.back()) {
+            co.back() += cur;
         } else {
-            out.write((char *) &(current.i), sizeof(uint32_t));
-            out.write((char *) &(current.j), sizeof(uint32_t));
-            out.write((char *) &(current.weight), sizeof(double));
+            out.write((char *) &(cur.i), sizeof(uint32_t));
+            out.write((char *) &(cur.j), sizeof(uint32_t));
+            out.write((char *) &(cur.weight), sizeof(double));
         }
     }
     co.clear();
     out.close();
 }
 
+//写入左上角矩阵
 void CoMat::write_high_cooccur(std::vector<double> &bigram_table) {
     //如果是共现矩阵左上角高频共现词
     for (uint32_t i = 0; i != vocab_size; ++i) {
@@ -121,8 +127,8 @@ void CoMat::write_high_cooccur(std::vector<double> &bigram_table) {
         }
     }
 //    INFO("bigram_table  is :" , bigram_table.size());
-    TRACE("bigram_table  is :", 2);
-    std::ofstream out("log/temp.bin_" + std::to_string(fidCounter), std::ios::out | std::ios::binary);
+    TRACE("bigram_table  is :", bigram_table.size());
+    std::ofstream out(tempFileName + std::to_string(fidCounter), std::ios::out | std::ios::binary);
     assert(out);
     for (const CoRec &co:high_cooccur) {
         out.write((char *) &(co.i), sizeof(uint32_t));
@@ -133,49 +139,55 @@ void CoMat::write_high_cooccur(std::vector<double> &bigram_table) {
     high_cooccur.clear();
 }
 
+//合并所有的临时文件
 void CoMat::merge_files(int fileAllNums) {
-
     TRACE("merge.... file fileAllNumss is :  ", fileAllNums);
+    //nums是现有临时文件的数量,i是临时变量
     int i, nums = fileAllNums;
     long long counter = 0;
     CRECID _new, old;
+//    优先队列,小根堆
     priority_queue que(fileAllNums);
     std::ofstream fout("log/cooccur.bin", std::ios::out | std::ios::binary);
 
 //打开所有文件,保存到fid中
-    std::ifstream fid[fileAllNums];
+    std::ifstream fin[fileAllNums];
     for (i = 0; i < fileAllNums; i++) {
-        fid[i].open("log/temp.bin_" + std::to_string(i), std::ios::out | std::ios::binary);
+        fin[i].open(tempFileName + std::to_string(i), std::ios::out | std::ios::binary);
     }
 
 //将所以文件的第一个词汇加入到优先队列中去
     for (i = 0; i < fileAllNums; i++) {
-        fid[i].read(reinterpret_cast<char *>(&_new), sizeof(CREC));
-        _new.id = i;
+        fin[i].read(reinterpret_cast<char *>(&_new), sizeof(CREC));
+        _new.fileId = i;
+        //注意此处插入的i需要加1,i是从0开始的
         que.insert(_new, i + 1);
     }
 
-//弹出堆的顶部节点,保存它,并判断下一个是否是重复的
+//弹出堆的顶部节点,保存它,以判断下一个是否是重复的
     old = que.top();
-    i = que.top().id;
-    que.remove(nums);
-    fid[i].read(reinterpret_cast<char *>(&old), sizeof(CREC));
-    if (!(fid[i])) nums--;
+//    i记录了文件id
+    i = que.top().fileId;
+    que.remove(nums-1);
+    fin[i].read(reinterpret_cast<char *>(&_new), sizeof(CREC));
+    //文件写完了，将nums减一，最后再统一关闭文件
+    if (!(fin[i])) nums--;
     else {
-        _new.id = i;
+        _new.fileId = i;
+        //加入优先队列，此处会调整堆
         que.insert(_new, nums);
     }
 
-    /* Repeatedly pop top node and fill priority queue until files have reached EOF */
+    //重复操作，直到所有文件都被写完
     while (nums > 0) {
-        //counter计数,计算一共有多少共线词汇的数目,现在还不太明白
+        //counter计数,计算一共有多少共现词汇的数目
         counter += merge_write(que.top(), old, fout);
-        i = que.top().id;
-        que.remove(nums);
-        fid[i].read(reinterpret_cast<char *>(&old), sizeof(CREC));
-        if (!(fid[i])) nums--;
+        i = que.top().fileId;
+        que.remove(nums-1);
+        fin[i].read(reinterpret_cast<char *>(&_new), sizeof(CREC));
+        if (!(fin[i])) nums--;
         else {
-            _new.id = i;
+            _new.fileId = i;
             que.insert(_new, nums);
         }
     }
@@ -185,9 +197,9 @@ void CoMat::merge_files(int fileAllNums) {
     fout.close();
 
 //    合并完毕,关闭所有文件
-    for (i = 0; i < fileAllNums; i++) fid[i].close();
+    for (i = 0; i < fileAllNums; i++) fin[i].close();
 
-    TRACE("merge  down", "....");
+    TRACE("merge  down all cooccur number is", counter);
     return;
 }
 
@@ -201,7 +213,6 @@ CoMat::CoMat(unsigned long long vocab_size, std::string input_file,
     memory_limit(memory_limit)
  {
     initParas();
-    TRACE("vocab_size :", vocab_size);
     TRACE("index.size() :", index.size());
 };
 
@@ -209,7 +220,9 @@ CoMat::CoMat(unsigned long long vocab_size, std::string input_file,
 bool CoMat::lookup(const std::string &key, unsigned long &id, const Vocabulary &vocab) {
     try {
         id = vocab[key];
+//        printf("id :%ld,\n",id);
     } catch (const std::out_of_range &e) {
+//        printf("not in...");
         return 0;
     }
     return 1;
@@ -243,8 +256,7 @@ void CoMat::sliding_window(const Vocabulary &vocab, unsigned long &window) {
 
 
 void CoMat::initParas() {
-//    TODO  搞清楚怎么计算,这段代码从源代码中直接copy的
-
+//    TODO  以后搞清楚怎么计算,这段代码从源代码中直接copy的
     double rlimit, n = 1e5;
 
     rlimit = 0.85 * (double) memory_limit * 1073741824 / (sizeof(CREC));
@@ -255,7 +267,7 @@ void CoMat::initParas() {
     overflow_length = (long long) rlimit / 6;
 
 
-
+    //首位置零,从1开始
     index[0] = 0;
     for (uint32_t i = 1; i != vocab_size + 1; ++i) {
         index[i] = index[i - 1] + std::min((int) max_product / i, vocab_size);
@@ -263,6 +275,5 @@ void CoMat::initParas() {
 
     bigram_table = std::vector<double>(index[vocab_size], 0);
     std::cout << "bigram_table..." << bigram_table.size() << std::endl;
-
     return;
 };

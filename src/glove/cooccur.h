@@ -8,8 +8,7 @@
 #include <iostream>
 #include "utils.h"
 #include "vocabulary.h"
-#include "base/args.h"
-#include "declare.h"
+#include "args.h"
 
 
 class CoMat {
@@ -20,14 +19,13 @@ private:
 	std::string context;
 	uint32_t vocab_size;
 	bool exists;
-	unsigned long id;
+	unsigned long id=0;
 	std::list<CoRec> low_cooccur;
 	std::ifstream input;
 	std::list<CoRec> high_cooccur;
 
 	std::vector<unsigned long> index;
 	std::vector<double> bigram_table;//    bigram_table存储高频的共现矩阵，用一维数组模拟二维数组
-	int ind = 0;
 	int fidCounter = 0;
 	int memory_limit;
 
@@ -37,6 +35,8 @@ private:
 
 	long long max_product;
 	long long overflow_length;
+
+	std::string tempFileName="log/temp.bin_";
 
 
 public:

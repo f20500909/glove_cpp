@@ -4,8 +4,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../../build)
 
 aux_source_directory(. SERVER_DIR)
 
-include_directories(src)
-aux_source_directory(src SERVER_DIR)
+include_directories(./)
+aux_source_directory(./ SERVER_DIR)
 
 
 include_directories(data)

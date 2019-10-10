@@ -1,18 +1,14 @@
 #include "vocabulary.h"
 
-bool operator<(const WordFreq &w1, const WordFreq &w2) {
-    return w1.second < w2.second || w1.first < w2.first;
-}
-
 // Vocabulary
-Vocabulary::Vocabulary(unsigned long min_count, unsigned long long max_size, bool keep_case, std::string input_file)
-        : min_count(min_count), max_size(max_size), keep_case(keep_case), input_file(input_file) {
+Vocabulary::Vocabulary(unsigned long min_count, unsigned long long max_size, std::string input_file)
+        : min_count(min_count), max_size(max_size), input_file(input_file) {
 
     build();
-    sort("desc");
+//    sort("desc");
 }
-Vocabulary::Vocabulary()
-{}
+
+Vocabulary::Vocabulary() {}
 
 
 void Vocabulary::build(const std::vector<WordFreq> &v) {
@@ -28,27 +24,25 @@ void Vocabulary::build() {
 
     std::string line;
     std::unordered_map<std::string, size_t> counts;
-    std::string key;
 
-    // Statistics
+    // 统计词频
     while (getline(ifs, line)) {
         std::vector<std::string> &&_words = split(line);
 
         for (const auto &word : _words) {
-            key = keep_case ? word : lower(word);
-            ++counts[key];
+            ++counts[lower(word)];
         }
     }
     ifs.close();
 
-    // Remove low frequencies
+    // 移除低频词汇
     std::vector<WordFreq> vec;
-    std::copy_if(
-            counts.begin(), counts.end(), std::back_inserter(vec),
-            [&](const WordFreq &w) { return w.second >= this->min_count; });
+    std::copy_if(counts.begin(), counts.end(), std::back_inserter(vec),
+                 [&](const WordFreq &w) { return w.second >= this->min_count; });
 
-    // Trim to max size
+    // 排序
     std::sort(vec.begin(), vec.end(), [](const WordFreq &w1, const WordFreq &w2) { return w1.second > w2.second; });
+    // 删除 注意这里是低位删除,如果大于最大容量,会剔除低频词汇,保留高频词汇,对生僻词不利
     vec.erase(min(vec.begin() + max_size, vec.end()), vec.end());
 
     build(vec);
@@ -56,60 +50,17 @@ void Vocabulary::build() {
 }
 
 void Vocabulary::add(const std::string &word, CountType freq) {
-    std::string key = keep_case ? word : lower(word);
-    if (has(key, true)) {
-        this->freq[key] += freq;
-    } else if (!full()) {
-        std::uint32_t id = size();
-        this->freq[key] += freq;
-        this->atoi[key] = id;
-        this->itoa[id] = key;
-    }
+    std::uint32_t id = size();
+    //词频
+    this->freq[word] += freq;
+    //依据词频得ID
+    this->atoi[word] = id;
+    //依据ID得词频
+    this->itoa[id] = word;
+
     return;
 }
 
-bool Vocabulary::has(const std::string &word) const {
-    return freq.count(keep_case ? word : lower(word)) > 0;
-}
-
-bool Vocabulary::has(const std::string &word, bool ignore_case) const {
-    // If `ignore_case` is `true`, find directly, else respect the private
-    // member `keep_case`
-    return ignore_case ? freq.count(word) > 0 : has(word);
-}
-
-void Vocabulary::merge(const Vocabulary &other) {
-    return merge(other.freq);
-}
-
-void Vocabulary::merge(const WordMap &freq) {
-    for (const auto &it : freq) {
-        add(it.first, it.second);
-    }
-    return;
-}
-
-void Vocabulary::sort(const std::string &order) {
-    std::vector<WordFreq> vec(
-            std::make_move_iterator(freq.begin()),
-            std::make_move_iterator(freq.end()));
-
-    if (order == "desc" || order == "asc") {
-        auto compare = [&order](const WordFreq &w1, const WordFreq &w2) {
-            return order == "desc" ? w1.second > w2.second
-                                   : w1.second < w2.second;
-            // TODO: by freq and alphabet
-        };
-        std::sort(vec.begin(), vec.end(), compare);
-
-    } else if (order == "rand") {
-        unsigned seed =
-                std::chrono::system_clock::now().time_since_epoch().count();
-        std::shuffle(vec.begin(), vec.end(), std::default_random_engine(seed));
-    }
-
-    return build(vec);
-}
 
 std::set<std::string> Vocabulary::words() const {
     std::set<std::string> keys;
@@ -123,9 +74,6 @@ std::uint32_t Vocabulary::size() const {
     return itoa.size();
 }
 
-bool Vocabulary::full() const {
-    return freq.size() >= max_size;
-}
 
 void Vocabulary::clear() {
     freq.clear();
@@ -133,52 +81,7 @@ void Vocabulary::clear() {
     atoi.clear();
 }
 
-void Vocabulary::to_txt(const std::string &file) const {
-//    std::ofstream os(file);
-//
-//    //将unordered_map 中的数据进行有序排序
-//    std::map<int, int> tmp;
-//    std::transform(freq.begin(), freq.end(), std::inserter(tmp, tmp.begin()),
-//                   [](std::pair<int, int> a) { return std::pair<int, int>(a.second, a.first); });
-//
-//    std::cout<<tmp.max_size()<<std::endl;
-//    std::cout<<"==="<<std::endl;
-//    for (auto m:tmp) {
-//        std::cout << m.first << std::endl;
-//    }
-//
-//    for (const auto &it : freq) {
-//        os << it.first << " " << it.second << std::endl;
-//    }
-//    os.close();
-//
-//    std::ofstream os1, os2;
-//    file::open(os1, file + ".itoa");
-//    file::open(os2, file + ".atoi");
-//    for (const auto &it : itoa) {
-//        os1 << it.first << " " << it.second << std::endl;
-//        os2 << it.second << " " << it.first << std::endl;
-//    }
-//    os1.close();
-//    os2.close();
-}
 
-
-WordMap::iterator Vocabulary::begin() {
-    return freq.begin();
-}
-
-WordMap::iterator Vocabulary::end() {
-    return freq.end();
-}
-
-WordMap::const_iterator Vocabulary::cbegin() {
-    return freq.cbegin();
-}
-
-WordMap::const_iterator Vocabulary::cend() {
-    return freq.cend();
-}
 
 std::string Vocabulary::operator[](const std::uint32_t &i) const {
     return itoa.at(i);
@@ -201,13 +104,10 @@ std::ostream &operator<<(std::ostream &os, const Vocabulary &vocab) {
     for (const auto &it : vocab.atoi) {
         os << it.first << " " << it.second << std::endl;
     }
-
     return os;
 }
 
 void Vocabulary::load() {
-//    std::string vocab = file + ".voc";
-
     std::ifstream in("vocab.txt");
     assert(in);
     std::cout << "load from " << "vocab.txt" << "....." << std::endl;
@@ -221,4 +121,4 @@ void Vocabulary::load() {
         id++;
     }
     in.close();
-};
+}

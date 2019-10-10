@@ -52,7 +52,6 @@ help info......
   -threads                  train thread [40]
   -memory_limit             memory used to tain (GB) [1]
   -lr                       learning rate [0.05]
-  -keep_case                case-sensitive or not [0]
 ```
 
 with shell:
@@ -61,6 +60,19 @@ with shell:
 
 我去掉了很过我看上去用处不大的功能(只是我认为的用处打大的功能,有些细节并不理解也移除了),如提取共现矩阵的symmetric功能
 
+忽略了大小写,统一改大写为小写
+
+
+TODO:
+
+修复有时会发生的错误:   read err...: Connection reset by peer
+
+在合并共现词时，高频和低频矩阵好像写在了一个文件里面，感觉有点问题.....
+
+
+
+
+在编译pybind_11时不能让对应文件被include 必须用cmake加载
 
 
 ![word](https://github.com/f20500909/glove_py/blob/master/scripts/tsne.png)

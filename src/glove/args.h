@@ -15,11 +15,11 @@ public:
 
     unsigned long long vocab_size = 0;//vocab_size已经在args里面赋值
     unsigned long long max_size = 1e7;//vocab_size已经在args里面赋值
-    unsigned long min_count = 1;
+    unsigned long min_count = 5;
     unsigned long window = 10;
     unsigned long embed_size = 2;
     unsigned long epoch = 4;
-    int threads = 40;
+    int threads = 20;
     int memory_limit = 1;
 
     double lr = 0.05;

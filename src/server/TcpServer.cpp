@@ -24,8 +24,11 @@ TcpServer::~TcpServer() {
 
 void TcpServer::start() {
     threadPool_->start();
-    mainLoop->runInLoop(std::bind(&TcpServer::acceptorListen, this));
+//    mainLoop->runInLoop(std::bind(&TcpServer::acceptorListen, this));
+    acceptorListen();
+
 }
+
 
 void TcpServer::newConnection(int sockfd, const sockaddr_in &peerAddr) {
     char buf[32];
@@ -39,6 +42,7 @@ void TcpServer::newConnection(int sockfd, const sockaddr_in &peerAddr) {
     EventLoop *ioLoop = threadPool_->getNextLoop();
     SP_TcpConnection conn(std::make_shared<TcpConnection>(ioLoop, sockfd, localAddr, peerAddr));
 
+//    map.insert(std::make_pair(connName, conn));
     map.insert(std::make_pair(connName, conn));
 
     conn->setConnectionCallback(connCallback_);
@@ -46,11 +50,15 @@ void TcpServer::newConnection(int sockfd, const sockaddr_in &peerAddr) {
     conn->setWriteCompleteCallback(writeCompleteCallback_);
     conn->setCloseCallback(std::bind(&TcpServer::removeConnection, this, _1));
 
-    ioLoop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
+    conn->connectEstablished();
+//    ioLoop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
+
 }
 
 void TcpServer::removeConnection(const SP_TcpConnection &conn) {
-    mainLoop->runInLoop(std::bind(&TcpServer::removeConnectionInLoop, this, conn));
+//    mainLoop->runInLoop(std::bind(&TcpServer::removeConnectionInLoop, this, conn));
+    removeConnectionInLoop(conn);
+
 }
 
 void TcpServer::removeConnectionInLoop(const SP_TcpConnection &conn) {

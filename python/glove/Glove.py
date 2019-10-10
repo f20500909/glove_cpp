@@ -5,7 +5,7 @@ from glove_pybind import *
 class Glove:
     def __init__(self, input_file="small_text",
                 vocab_size=0, max_size=10000000, min_count=1,
-                 window=10, embed_size=80, epoch=1,  threads=40, lr=0.05, keep_case=0 ):
+                 window=10, embed_size=80, epoch=1,  threads=40, lr=0.05):
 
             self.model = glove()
             self.model.input_file = input_file
@@ -16,7 +16,6 @@ class Glove:
             self.model.epoch = epoch
             self.model.threads = threads
             self.model.lr = lr
-            self.model.keep_case = keep_case
             os.mkdir("log/")
 
     def to_txt(self):

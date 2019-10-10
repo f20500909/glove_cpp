@@ -25,12 +25,10 @@ public:
 
     void updateChannel(Channel *channel);
 
-    //2018.2.8 add runInLoop
     void runInLoop(const Functor &cb);
 
     void queueInLoop(const Functor &cb);
 
-    // 2018.2.23 处理TcpConnection连接关闭的需要
     void removeChannel(Channel *chptr);
 
 
@@ -40,7 +38,7 @@ private:
     ChannelList activeChannels_;
     const pid_t threadId_;
 
-    void handleRead(); // wake up;
+    void handlWakeupeRead(); // wake up;
     void doPendingFunctors();
 
     int wakeupFd_;

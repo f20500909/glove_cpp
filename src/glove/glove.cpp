@@ -3,7 +3,7 @@
 Glove::Glove(std::string input_file,
                unsigned long long vocab_size, unsigned long long max_size,
              unsigned long min_count, unsigned long window, unsigned long embed_size, unsigned long epoch,
-             int threads, double lr, bool keep_case) {
+             int threads, double lr) {
     this->input_file = input_file;
     this->vocab_size = vocab_size;
     this->max_size = max_size;
@@ -13,7 +13,6 @@ Glove::Glove(std::string input_file,
     this->epoch = epoch;
     this->threads = threads;
     this->lr = lr;
-    this->keep_case = keep_case;
 };
 
 Glove::Glove(std::vector<std::string> args_cmd) {
@@ -26,22 +25,30 @@ Glove::Glove() {
 
 };
 
-void Glove::train(std::string input_file) {
+void Glove::run(std::string input_file) {
     this->input_file = input_file;
 
-    std::cout << "Building vocabulary..." << std::endl;
-    voca = Vocabulary(min_count, max_size, keep_case, input_file);
-//    std::cout << "Vocab size: " << v.size() << std::endl;
+    TRACE("====================================================== ","\n");
+    TRACE("building vocabulary","...");
+    voca = Vocabulary(min_count, max_size,  input_file);
     vocab_size = voca.size();
+    TRACE("vocabulary size is ",vocab_size);
+    TRACE("Build vocabulary ","down");
 
+
+
+    TRACE("====================================================== ","\n");
+    TRACE("building cooccur mat","...");
     CoMat builder(vocab_size,input_file,  window,  memory_limit);
     builder.build(voca);
+    TRACE("build cooccur mat  ","down");
 
-//    std::cout << "Training..." << std::endl;
+
+
+    TRACE("====================================================== ","\n");
     model = Train(embed_size, vocab_size, threads,  epoch, lr);
     model.train();
-//    std::cout << "Training down..." << std::endl;
-
+    TRACE("====================================================== ","\n");
 };
 
 

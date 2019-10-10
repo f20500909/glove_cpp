@@ -2,23 +2,16 @@
 
 const int kPollTimeMs = -1;
 //const int kPollTimeMs = 10000;
-int createEventfd() {
-	int evtfd = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
-	if (evtfd < 0) {
-		printf("LOG_SYSERR: Failed in eventfd");
-		exit(-1);
-	}
-	return evtfd;
-}
+
 
 
 EventLoop::EventLoop()
 		: threadId_(unit::tid()),
 		  poller_(std::make_unique<EPoller>(this)),
-		  wakeupFd_(createEventfd()),
+		  wakeupFd_(unit::createEventfd()),
 		  wakeupChannel_(std::make_unique<Channel>(this, wakeupFd_))
 {
-	wakeupChannel_->setReadCallback(std::bind(&EventLoop::handleRead, this));
+	wakeupChannel_->setReadCallback(std::bind(&EventLoop::handlWakeupeRead, this));
 	wakeupChannel_->enableReading();
 }
 
@@ -27,6 +20,7 @@ EventLoop::~EventLoop() {
 }
 
 
+//主循环
 void EventLoop::loop() {
 	while (true) {
 		activeChannels_.clear();
@@ -73,7 +67,7 @@ void EventLoop::doPendingFunctors() {
 }
 
 
-void EventLoop::handleRead() {
+void EventLoop::handlWakeupeRead() {
 	uint64_t one = 1;
 	ssize_t n = ::read(wakeupFd_, &one, sizeof one);
 	if (n != sizeof one) {

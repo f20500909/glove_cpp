@@ -34,6 +34,10 @@ public:
     inline double &operator[](uint32_t i) {
         return data_[i];
     }
+    inline double& at(uint32_t i){
+        return data_[i];
+    }
+
 
     inline const double &operator[](uint32_t i) const {
         return data_[i];

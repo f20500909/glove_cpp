@@ -2,24 +2,32 @@
 
 
 Train::Train(unsigned long embed_size, unsigned long long vocab_size, int threads,
-             unsigned long epoch,  double lr
-           ) : embed_size(embed_size),
-                                      vocab_size(vocab_size),
-                                      threads(threads),
-                                      epoch(epoch),
-                                      lr(lr)
-                            {
+             unsigned long epoch, double lr
+) : embed_size(embed_size),
+    vocab_size(vocab_size),
+    threads(threads),
+    epoch(epoch),
+    lr(lr) {
     //W1随机生成
     double scale = 0.01;
     //词向量权重参数
     W1 = std::make_shared<DenseMatrix>(vocab_size, embed_size, scale);
     W2 = std::make_shared<DenseMatrix>(vocab_size, embed_size, scale);
+
+
+    //权重的梯度的累加历史
     GW1 = std::make_shared<DenseMatrix>(vocab_size, embed_size);
     GW2 = std::make_shared<DenseMatrix>(vocab_size, embed_size);
+
+
+//    bias累加历史
     Gb1 = std::make_shared<Vector>(vocab_size);
     Gb2 = std::make_shared<Vector>(vocab_size);
+
+//    两个偏执
     b1 = std::make_shared<Vector>(vocab_size);
     b2 = std::make_shared<Vector>(vocab_size);
+    //初始化线程,并输出一些信息
     threadCount();
 };
 
@@ -31,23 +39,25 @@ void Train::train() {
         Timer timer;
         timer.start();
         vec_threads.clear();
-        for (uint32_t threadId = 0; threadId != threads; ++threadId) {
-            vec_threads.emplace_back(&Train::single_thread, this, threadId, std::ref(partial_loss[threadId]),
-                                     lr);
+
+        //加入所有线程
+        for (uint32_t threadId = 0; threadId < threads; ++threadId) {
+            vec_threads.emplace_back(&Train::single_thread, this, threadId, std::ref(partial_loss[threadId]), lr);
         }
 
+        //让所有线程开始
         std::for_each(vec_threads.begin(), vec_threads.end(), [](std::thread &t) { return t.join(); });
-        double loss = std::accumulate(partial_loss.begin(), partial_loss.end(), 0.0);
 
         timer.stop();
-        std::cout << std::fixed << "Epoch " << std::setw(3) << _epoch << " (took:  " << std::setprecision(3)
-                  << timer.elapsed() << "s): Loss: " << std::setprecision(6) << loss << std::endl;
+        //输出信息  epoch  一个epoch所需时间   loss (即是把部分的loss相加)
+        TRACE("Epoch  ", _epoch, "    took ", timer.elapsed(), "s     Loss ",
+              std::accumulate(partial_loss.begin(), partial_loss.end(), 0.0));
     }
     return;
 }
 
 
-double Train::single_thread( uint32_t threadId, double &loss, double lr) {
+double Train::single_thread(uint32_t threadId, double &loss, double lr) {
     std::ifstream in("log/cooccur.bin");
     assert(in);
     untils::seek(in, threadInfo[threadId]);
@@ -64,41 +74,40 @@ double Train::single_thread( uint32_t threadId, double &loss, double lr) {
     double weight;
     double sigma;
 
-    double db1 = 0;
-    double db2 = 0;
 
     while (in) {
         in.read((char *) &i, sizeof(uint32_t));
         in.read((char *) &j, sizeof(uint32_t));
         in.read((char *) &val, sizeof(double));
 
-        weight = weighted(val);
 
-        sigma = difference(W1->dotIds(i, j, *W2), (*b1)[i], (*b2)[j], std::log(val));
+//        sigma既是优化的目标,取样是一次取一个样本,不需要除以样本数
+        sigma = difference(W1->dotIds(i, j, *W2), b1->at(i), b2->at(j), std::log(val));
+
+//        乘上权重,权重只和词频有关,是一个单一变量的函数式,先单增,然后变平
+        weight = weighted(val);
         loss += 0.5 * weight * std::pow(sigma, 2);
         sigma *= weight;
+
         dw1 = W2->getVector(j) * sigma;
         dw2 = W1->getVector(i) * sigma;
 
-        db1 = sigma;
-        db2 = sigma;
 
-        Vector vec1 = dw1 * dw1;
-        GW1->addVectorToRow(vec1, i, 1);
-        Vector vec2 = dw2 * dw2;
-        GW2->addVectorToRow(vec2, j, 1);
+//        Vector vec1 = ;
+        GW1->addVectorToRow(dw1 * dw1, i, 1);
+//        Vector vec2 = ;
+        GW2->addVectorToRow(dw2 * dw2, j, 1);
 
 //        //累加bias
-        (*Gb1)[i] += db1 * db1;
-        (*Gb2)[j] += db2 * db2;
+        Gb1->at(i) += sigma * sigma;
+        Gb2->at(j) += sigma * sigma;
 
-        (*W1).addVectorToRow(dw1 * lr / (((*GW1).getVector(i) + 1e-8).sqrt()), i, -1);
-        (*W2).addVectorToRow(dw2 * lr / (((*GW2).getVector(j) + 1e-8).sqrt()), j, -1);
+        W1->addVectorToRow(dw1 * lr / ((GW1->getVector(i) + 1e-8).sqrt()), i, -1);
+        W2->addVectorToRow(dw2 * lr / ((GW2->getVector(j) + 1e-8).sqrt()), j, -1);
 
-
-        (*b1)[i] -= lr * db1 / std::sqrt((*Gb1)[i] + 1e-8);
-        (*b2)[j] -= lr * db2 / std::sqrt((*Gb2)[j] + 1e-8);
-
+//        加上1e-8是为了不变成0,
+        b1->at(i) -= (sigma * lr) / std::sqrt(Gb1->at(i) + 1e-8);
+        b2->at(j) -= (sigma * lr) / std::sqrt(Gb2->at(j) + 1e-8);
 
         if (in.tellg() == threadInfo[threadId + 1]) {
             break;
@@ -108,9 +117,8 @@ double Train::single_thread( uint32_t threadId, double &loss, double lr) {
     return loss;
 }
 
-
 inline double Train::weighted(double cooccur) const {
-    return std::min(std::pow(cooccur / threshold, alpha), 1.0);
+    return std::min(std::pow(cooccur / threshold, 0.75), 1.0);
 }
 
 inline double Train::difference(double dotValue, double b1, double b2, double gold) const {
@@ -118,11 +126,13 @@ inline double Train::difference(double dotValue, double b1, double b2, double go
 }
 
 void Train::to_txt(const Vocabulary &v) const {
+    //写入词向量的属性信息,这里只写入了维度z信息
     std::ofstream os;
     file::open(os, "log/wordvec.txt.meta");
     os << embed_size << std::endl;
     os.close();
 
+    //本来是有两个词向量矩阵的,这里只保留了一个,一个也够用了
     file::open(os, "log/wordvec.txt");
     for (std::uint32_t i = 0; i != W1->rows(); ++i) {
         for (std::uint32_t j = 0; j != W1->cols(); ++j) {
@@ -134,16 +144,18 @@ void Train::to_txt(const Vocabulary &v) const {
     os.close();
 
 
+    //写入词汇
     file::open(os, "log/vocab.txt");
     for (std::uint32_t i = 0; i != W1->rows(); ++i) {
+//        os << v[i] << " " << v.freq.at(v[i].c_str()) << std::endl;
         os << v[i] << std::endl;
     }
     os.close();
-
 }
 
+//初始化线程信息
+//这里主要是初始化threadInfo,计算每个线程从文件的那个部分开始计算,每个线程计算的文件是相互隔离的不干饶
 void Train::threadCount() {
-
     std::ifstream in("log/cooccur.bin");
     assert(in);
     int size = untils::size(in);
@@ -161,7 +173,6 @@ void Train::threadCount() {
     for (auto info:threadInfo) {
         std::cout << info << "  ";
     }
-    std::cout << std::endl;
 }
 
 AnalogyPairs Train::most_similary(const std::string &word, unsigned long num, const Vocabulary &vocab) {
@@ -232,7 +243,6 @@ std::vector<int> Train::getTop(Vector vec, uint32_t num) {
 
 
 void Train::load_model(std::string wordvec_file, std::string meta_file, Vocabulary &voca) {
-
     std::ifstream meta(meta_file);
     assert(meta);
     meta >> embed_size;
@@ -252,8 +262,6 @@ void Train::load_model(std::string wordvec_file, std::string meta_file, Vocabula
         count_2++;
     }
     mat.close();
-
-
 }
 
 

@@ -28,7 +28,6 @@ public:
         conn->shutdown();
     }
 
-
 protected:
     ConnectionCallback connCallback_;
     MessageCallback msgCallback_;

@@ -1,7 +1,5 @@
 #ifndef CHANNEL_H
 #define CHANNEL_H
-
-
 #include <memory>
 #include <string>
 #include <string.h>
@@ -10,7 +8,6 @@
 #include <sstream>
 #include <cstdio>
 #include <sys/epoll.h>
-
 
 #include "EventLoop.h"
 #include "Channel.h"
@@ -61,7 +58,6 @@ public:
     int events() const { return events_; }
 
     void set_revents(int revt) { revents_ = revt; } //used by pollers
-    bool isNoneEvent() const { return events_ == 0; }
 
     void enableReading() {
         events_ |= EPOLLIN | EPOLLPRI;
@@ -104,7 +100,6 @@ private:
     EventCallback writeCallback_;
     EventCallback closeCallback_;
     EventCallback errorCallback_;
-
 };
 
 

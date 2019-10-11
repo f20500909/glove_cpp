@@ -7,10 +7,8 @@
 #include "EventLoop.h"
 #include "Channel.h"
 #include "unit.h"
-
 class EPoller:noncopyable {
 public:
-
 	EPoller(EventLoop *loop);
 
 	~EPoller();
@@ -22,15 +20,13 @@ public:
 	void removeChannel(Channel *channel);
 
 private:
-	static const int kInitEvnetListSize = 16;
-
-	void fillActiveChannels(int numEvents, ChannelList *activeChannels) const;
+	static const int initEvnetVecSize = 16;
 
 	void update(int operation, Channel *channel);
 
 	int epollfd_;
-	EventList events_;
-	ChannelMap channels_;
+	EventVec events_;
+	ChannelMap _Channel_map;
 };
 
 #endif

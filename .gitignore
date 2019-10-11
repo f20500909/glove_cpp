@@ -6,4 +6,6 @@
 /build
 */temp
 *text8
-/temp
+/temp*
+*cmake-build-debug*
+*.so

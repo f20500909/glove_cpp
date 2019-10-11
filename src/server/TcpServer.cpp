@@ -47,18 +47,17 @@ void TcpServer::newConnection(int sockfd, const sockaddr_in &peerAddr) {
 
     conn->setConnectionCallback(connCallback_);
     conn->setMessageCallback(msgCallback_);
+    //设置完成链接时的动作
     conn->setWriteCompleteCallback(writeCompleteCallback_);
     conn->setCloseCallback(std::bind(&TcpServer::removeConnection, this, _1));
 
     conn->connectEstablished();
 //    ioLoop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
-
 }
 
 void TcpServer::removeConnection(const SP_TcpConnection &conn) {
 //    mainLoop->runInLoop(std::bind(&TcpServer::removeConnectionInLoop, this, conn));
     removeConnectionInLoop(conn);
-
 }
 
 void TcpServer::removeConnectionInLoop(const SP_TcpConnection &conn) {

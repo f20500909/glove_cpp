@@ -37,7 +37,7 @@ typedef std::function<void()> ReadEventCallback;
 typedef std::function<void()> Functor;
 
 typedef std::vector<Channel *> ChannelList;
-typedef std::vector<struct epoll_event> EventList;
+typedef std::vector<struct epoll_event> EventVec;
 typedef std::map<int, Channel *> ChannelMap; //sockfd - Channel
 
 typedef std::vector<std::shared_ptr<Task<EventLoop>>> VEC_SP_Task_EventLoop;

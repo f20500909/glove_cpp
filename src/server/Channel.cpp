@@ -12,12 +12,9 @@ void Channel::update() {
 	loop_->updateChannel(this);
 }
 
-
 //handleEvent是Channel的核心，它由EventLoop()调用，它的功能是根据revents_的值分别调用不同的用户回调
 //后续待扩充
 void Channel::handleEvent() {
-
-
     if(revents_ & POLLNVAL) {
         //printf("LOG_WARN Channel::handlerEvent() POLLNVAL");
     }

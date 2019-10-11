@@ -105,6 +105,5 @@ int main() {
 
     server.myServer_start();
     mainLoop.loop();
-
     return 0;
 }

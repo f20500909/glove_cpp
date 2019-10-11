@@ -1,3 +1,0 @@
-/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/server/cmake-build-debug/CMakeFiles/server.dir
-/media/wh/work/career/bolg_cpp/PROJECT/Glove_Server/src/server/cmake-build-debug/CMakeFiles/edit_cache.dir

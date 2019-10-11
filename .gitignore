@@ -9,3 +9,4 @@
 /temp*
 *cmake-build-debug*
 *.so
+/scripts/001

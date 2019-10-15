@@ -8,17 +8,16 @@
 #include "EventLoop.h"
 #include "Task.h"
 
-class EventLoopThreadPool : noncopyable {
+class ThreadPool : noncopyable {
 public:
-	EventLoopThreadPool(EventLoop *_mainLoop,int _numThreads);
+	ThreadPool(int _numThreads);
 
-	~EventLoopThreadPool();
+	~ThreadPool();
 
 	void start();
 
 	EventLoop *getNextLoop();
 private:
-	EventLoop *mainLoop;
 	int numThreads_;
 	int next_;
 	VEC_SP_Task_EventLoop threads_;

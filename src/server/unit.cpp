@@ -91,11 +91,11 @@ namespace unit {
     }
 
 
-    int createNonBlockingOrDie() {
+    int createNonBlocking() {
         //socket
         int sockfd = ::socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, IPPROTO_TCP);
         if (sockfd < 0) {
-            printf("Error in createNonBlockingOrDie()\n");
+            printf("Error in createNonBlocking()\n");
             exit(-1);
         }
         return sockfd;
@@ -104,40 +104,12 @@ namespace unit {
     int accept(int sockfd, struct sockaddr_in *addr) {
         socklen_t addrlen = sizeof(*addr);
 
-
         int connfd = ::accept4(sockfd, reinterpret_cast<sockaddr *>(addr),
                                &addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
         if (connfd < 0) {
             int savedErrno = errno;
             printf("LOG_SYSERR: accept");
 
-            switch (savedErrno) {
-                case EAGAIN:
-                case ECONNABORTED:
-                case EINTR:
-                case EPROTO:  // ?????
-                case EPERM:
-                case EMFILE: // per-process limit of open fd ??
-                    // expected errors
-                    errno = savedErrno;
-                    break;
-                case EBADF:
-                case EFAULT:
-                case EINVAL:
-                case ENFILE:
-                case ENOBUFS:
-                case ENOMEM:
-                case ENOTSOCK:
-                case EOPNOTSUPP:
-                    // unexpected errors
-                    printf("unexpected error of accept: %d", savedErrno);
-                    exit(-1);
-                    break;
-                default:
-                    printf("unknown error of accept: %d", savedErrno);
-                    exit(-1);
-                    break;
-            }
         }
         return connfd;
     }

@@ -1,29 +1,27 @@
 #include "ThreadPool.h"
 
-EventLoopThreadPool::EventLoopThreadPool(EventLoop* _mainLoop,int _numThreads)
-    : mainLoop(_mainLoop),
-      numThreads_(_numThreads),
-      next_(0)
-{
-
+//主线程初始化，线程数码初始化
+ThreadPool::ThreadPool( int _numThreads)
+        : numThreads_(_numThreads),
+          next_(0) {
+    assert(_numThreads>0);
 }
 
-EventLoopThreadPool::~EventLoopThreadPool() {
-
+ThreadPool::~ThreadPool() {
 }
 
-void EventLoopThreadPool::start() {
-    for(int i = 0; i < numThreads_; ++i) {
-        threads_.emplace_back(std::make_shared<  Task<EventLoop> >());
-        loops_.emplace_back(threads_[threads_.size()-1]->startLoop());
+void ThreadPool::start() {
+    //开启线程池
+    for (int i = 0; i < numThreads_; ++i) {
+        //线程池中加入任务
+        threads_.emplace_back(new Task<EventLoop>());
+//        开启线程中的循环
+        loops_.emplace_back(threads_[i]->startLoop());
     }
 }
 
-EventLoop* EventLoopThreadPool::getNextLoop() {
-    EventLoop* loop = mainLoop;
-    if(!loops_.empty()) {
-        loop = loops_[next_];
-        next_ = (next_ + 1) % loops_.size();
-    }
+EventLoop *ThreadPool::getNextLoop() {
+    EventLoop *loop = loops_[next_];
+    next_ = (next_ + 1) % loops_.size();
     return loop;
 }

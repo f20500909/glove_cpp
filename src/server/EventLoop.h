@@ -35,14 +35,9 @@ public:
 private:
 
     std::unique_ptr<EPoller> poller_UP;
-    ChannelList activeChannels_;
+    ChannelVec activeChannels_;
     const pid_t threadId_;
 
-    void handlWakeupeRead(); // wake up;
-    void doRest();
-
-    int wakeupFd_;
-    std::unique_ptr<Channel> wakeupChannel_;
     std::mutex _mutex;
     std::vector<Functor> restWork;
 

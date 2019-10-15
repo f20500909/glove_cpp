@@ -122,3 +122,7 @@ void Vocabulary::load() {
     }
     in.close();
 }
+
+
+
+

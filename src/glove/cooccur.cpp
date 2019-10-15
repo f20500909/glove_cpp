@@ -168,7 +168,11 @@ void CoMat::merge_files(int fileAllNums) {
     old = que.top();
 //    i记录了文件id
     i = que.top().fileId;
-    que.remove(nums-1);
+
+//    que.remove(nums-1);
+    que[0]=que[nums-1];
+    que.heapify(0);
+
     fin[i].read(reinterpret_cast<char *>(&_new), sizeof(CREC));
     //文件写完了，将nums减一，最后再统一关闭文件
     if (!(fin[i])) nums--;
@@ -181,9 +185,16 @@ void CoMat::merge_files(int fileAllNums) {
     //重复操作，直到所有文件都被写完
     while (nums > 0) {
         //counter计数,计算一共有多少共现词汇的数目
+        //此处传递的是引用,新旧词相同，返回0，
+        // 新旧词不同返回1，旧词写入，新词变为旧词
         counter += merge_write(que.top(), old, fout);
         i = que.top().fileId;
-        que.remove(nums-1);
+
+//        que.remove(nums-1);
+        que[0]=que[nums-1];;
+        que.heapify(0);
+
+
         fin[i].read(reinterpret_cast<char *>(&_new), sizeof(CREC));
         if (!(fin[i])) nums--;
         else {

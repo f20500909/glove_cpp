@@ -3,56 +3,34 @@
 using namespace std::placeholders;
 
 TcpConnection::TcpConnection(EventLoop *loop, int sockfd, const sockaddr_in &localAddr, const sockaddr_in &peerAddr)
-        : Connection(loop, sockfd, localAddr, peerAddr) {
+        :ioLoop(loop), _channel(new Channel(loop, sockfd)),_sockfd(sockfd) {
+
+    _channel->setReadCallback(std::bind(&TcpConnection::handleRead, this));
+    _channel->setWriteCallback(std::bind(&TcpConnection::handleWrite, this));
+    _channel->setCloseCallback(std::bind(&TcpConnection::handleClose, this));
+    _channel->setErrorCallback(std::bind(&TcpConnection::handleError, this));
 }
 
 TcpConnection::~TcpConnection() {
 }
 
-
 void TcpConnection::send(const std::string &message) {
-        sendInLoop(message.data(), message.size());
-}
+    if (!_channel->isWriting() & (_outputBuffer.readableSize() == 0)) {
+        int nwrote = ::write(_channel->fd(), static_cast<const char *>(message.data()), message.size() );
 
-void TcpConnection::send(std::shared_ptr<Buffer> buf) {
-        sendInLoopBuffer(buf);
-//        TODO: retrieveAll ...
-//        buf->retrieveAll();
-}
+        assert(nwrote == message.size());
+        assert(_writeCompleteCallback);
 
-
-void TcpConnection::sendInLoopBuffer(std::shared_ptr<Buffer> buf) {
-    std::shared_ptr<Buffer> buftmp = buf;
-    sendInLoop(buf->peek(), buf->readableSize());
-    buf.reset();
-}
-
-void TcpConnection::sendInLoop(const void *data, size_t len) {
-    ssize_t nwrote = 0;
-    size_t remaining = len;
-    if (!channel_->isWriting() & (outputBuffer_.readableSize() == 0)) {
-        nwrote = ::write(channel_->fd(), static_cast<const char *>(data), len);
-        if (nwrote >= 0) {
-            remaining = len - nwrote;
-            if (remaining == 0 && writeCompleteCallback_) {
-                loop_->queueInLoop( std::bind(writeCompleteCallback_, shared_from_this()) );
-            }
-        }
-    }
-    assert(nwrote <= len);
-    if (nwrote < len) {
-        outputBuffer_.append(static_cast<const char *>(data) + nwrote, remaining);
-        if (!channel_->isWriting()) {
-            channel_->enableWriting();
-        }
+        ioLoop->queueInLoop( std::bind(_writeCompleteCallback, shared_from_this()) );
     }
 }
 
 void TcpConnection::handleRead() {
     int savedErrno = 0;
-    ssize_t n = inputBuffer_.readFd(channel_->fd(), &savedErrno);
+
+    ssize_t n = _inputBuffer.readFd(_channel->fd(), &savedErrno);
     if (n > 0) {
-        msgCallback_(shared_from_this(), &inputBuffer_);
+        _msgCallback(shared_from_this(), &_inputBuffer);
     } else if (n == 0) {
         handleClose();
     } else {
@@ -63,24 +41,23 @@ void TcpConnection::handleRead() {
 }
 
 void TcpConnection::handleWrite() {
-    if (channel_->isWriting()) {
-        ssize_t n = ::write(channel_->fd(), outputBuffer_.peek(), outputBuffer_.readableSize());
+    if (_channel->isWriting()) {
+        ssize_t n = ::write(_channel->fd(), _outputBuffer.peek(), _outputBuffer.readableSize());
         if (n > 0) {
-//            outputBuffer_.retrieve(n);
-            if (outputBuffer_.readableSize() == 0) {
-                channel_->disableWriting();
-                if (writeCompleteCallback_) {
-                    loop_->queueInLoop(std::bind(writeCompleteCallback_, shared_from_this()));
+//            _outputBuffer.retrieve(n);
+            if (_outputBuffer.readableSize() == 0) {
+                _channel->disableWriting();
+                if (_writeCompleteCallback) {
+                    ioLoop->queueInLoop(std::bind(_writeCompleteCallback, shared_from_this()));
                 }
             }
         }
     }
 }
 
-
 void TcpConnection::handleClose() {
-    channel_->disableAll();
-    closeCallback_(shared_from_this());
+    _channel->disableAll();
+    _closeCallback(shared_from_this());
 }
 
 void TcpConnection::handleError() {
@@ -88,25 +65,22 @@ void TcpConnection::handleError() {
 }
 
 void TcpConnection::connectEstablished() {
-    channel_->enableReading();
-    connCallback_(shared_from_this());
+    _channel->enableReading();
+    _connCallback(shared_from_this());
 }
 
 void TcpConnection::connectDestroyed() {
-    channel_->disableAll();
-    connCallback_(shared_from_this());
-    loop_->removeChannel(channel_.get());
+    _channel->disableAll();
+    _connCallback(shared_from_this());
+    ioLoop->removeChannel(_channel.get());
 }
 
 void TcpConnection::shutdown() {
-//    loop_->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
-    shutdownInLoop();
+    ioLoop->runInLoop(std::bind(&TcpConnection::shutdownInLoop, this));
 }
 
 void TcpConnection::shutdownInLoop() {
-    if (!channel_->isWriting()) {
+    if (!_channel->isWriting()) {
         unit::shutdown(_sockfd);
     }
 }
-
-

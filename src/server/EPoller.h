@@ -13,7 +13,7 @@ public:
 
 	~EPoller();
 
-	void poll(int timeoutMs, ChannelList *activeChannels);
+	void poll(int timeoutMs, ChannelVec& activeChannels);
 
 	void updateChannel(Channel *channel);
 

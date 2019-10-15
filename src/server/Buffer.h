@@ -66,7 +66,6 @@ public:
 
 
 
-    Buffer &Absorb(Buffer &buf);
 
     Buffer &operator=(const Buffer &b) {
         if (this == &b) return *this;

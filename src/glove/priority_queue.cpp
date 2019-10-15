@@ -24,6 +24,21 @@ void priority_queue::insert(CRECID &_new, int size) {
     }
 }
 
+void priority_queue::heapify(int index){
+    int length=_data.size();
+    int left=(index<<1)+1;
+    int right=(index<<1)+2;
+    int maxId=index;
+    if(left<length&&_data[left]<_data[maxId]) maxId=left;
+    if(right<length&&_data[right]<_data[maxId]) maxId=right;
+    if(maxId!=index){
+        swap(index,maxId);
+        heapify(maxId);
+    }
+}
+
+
+
 void priority_queue::remove(int id) {
 //    printf("%d..........\n",size);
 //    assert(size==_data.size());

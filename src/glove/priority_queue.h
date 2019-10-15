@@ -20,6 +20,12 @@ public:
 /* Delete entry from priority queue */
     void remove(int size);
 
+    void heapify(int index);
+
+    CRECID& operator[](int index){
+        return _data[index];
+    }
+
 private:
     std::vector<CRECID> _data;
 };

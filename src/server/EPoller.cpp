@@ -12,27 +12,35 @@ EPoller::~EPoller() {
 	::close(epollfd_);
 }
 
-void EPoller::poll(int timeout, ChannelList *activeChannels) {
+void EPoller::poll(int timeout, ChannelVec& activeChannels) {
 	int numEvents = unit::epoll_wait(epollfd_, &*events_.begin(), static_cast<int>(events_.size()), timeout);
 	if (numEvents > 0) {
 		for (int i = 0; i < numEvents; ++i) {
+
 			Channel *channel = static_cast<Channel *> (events_[i].data.ptr);
+
 			channel->set_revents(events_[i].events);
-			activeChannels->push_back(channel);
+
+			activeChannels.push_back(channel);
+
 		}
+
 	}
 }
 
-
 void EPoller::updateChannel(Channel *channel) {
 	const int index = channel->index();
+
+
 	if (index == CTL_MOD || index == CTL_DEL) {
 		int fd = channel->fd();
 		if (index == CTL_MOD) {
+
 		    //保证fd不在对应的map中
 			assert(_Channel_map.find(fd) == _Channel_map.end());
 			_Channel_map[fd] = channel;
 		}
+
 		channel->set_index(CTL_ADD);
 		update(EPOLL_CTL_ADD, channel);
 	} else {
@@ -44,7 +52,6 @@ void EPoller::updateChannel(Channel *channel) {
 		}
 	}
 }
-
 
 void EPoller::removeChannel(Channel *channel) {
 	int fd = channel->fd();
@@ -67,5 +74,6 @@ void EPoller::update(int operation, Channel *channel) {
 	event.data.ptr = channel;
 	int fd = channel->fd();
 	unit::epoll_ctl(epollfd_, operation, fd, &event);
-}
 
+
+}

@@ -3,15 +3,13 @@
 #include "EventLoop.h"
 #include "Data.h"
 
-
 class MyServer : TcpServer {
 public:
-    MyServer(EventLoop *mainLoop, EventLoopThreadPool *threadPool) : TcpServer(mainLoop, threadPool) {
+    MyServer(EventLoop *mainLoop, ThreadPool *threadPool) : TcpServer(mainLoop, threadPool) {
     }
 
     static void onConnection(const SP_TcpConnection &conn) {
     }
-
 
     static std::string getPost(std::string request) {
         std::vector<std::string> res;
@@ -36,13 +34,9 @@ public:
 
 
         std::string postRequest = getPost(buf->readAll());
-
         std::cout << "==========postRequest:=====  " << postRequest << std::endl;
-
         std::cout << "-------------" << std::endl;
-
         Data wordvec;
-
         std::vector<std::string> words;
 
 
@@ -53,7 +47,6 @@ public:
             words.push_back(temp);
         }
 
-//
 //        std::cout<<"=======words============"<<std::endl;
 //        std::cout<< words[-1] <<std::endl;
 //        std::cout<<"=======words==========="<<std::endl;
@@ -84,6 +77,7 @@ public:
         conn->shutdown();
     }
 
+    //读取所需数据并设置回调函数
     void myServer_start() {
         setConnectionCallback(onConnection);
         setMessageCallback(onMessage);
@@ -96,14 +90,20 @@ private:
 };
 
 std::string data = std::string(1000, 'c');
+
 std::string MyServer::g_ServerMsg = "HTTP/1.0 200 OK\r\nTcpServer: Boyfriend TcpServer\r\n\r\nEverything is OK!" + data;
 
+
 int main() {
+    //主线程，用于接受连接
     EventLoop mainLoop;
-    EventLoopThreadPool *threadPool = new EventLoopThreadPool(&mainLoop, 5);
+    //初始化线程池
+    ThreadPool *threadPool = new ThreadPool( 5);
+
     MyServer server(&mainLoop, threadPool);
 
     server.myServer_start();
+
     mainLoop.loop();
     return 0;
 }

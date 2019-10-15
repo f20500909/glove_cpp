@@ -37,21 +37,9 @@ public:
 
     void setWriteCallback(const EventCallback &cb) { writeCallback_ = cb; }
 
-    void setCloseCallback(const EventCallback &cb) { closeCallback_ = cb; }
+    void setCloseCallback(const EventCallback &cb) { _closeCallback = cb; }
 
     void setErrorCallback(const EventCallback &cb) { errorCallback_ = cb; }
-
-    void setReadCallback(const ReadEventCallback &&cb) { readCallback_ = std::move(cb); }
-
-    void setWriteCallback(const EventCallback &&cb) { writeCallback_ = std::move(cb); }
-
-    void setCloseCallback(const EventCallback &&cb) { closeCallback_ = std::move(cb); }
-
-    void setErrorCallback(const EventCallback &&cb) { errorCallback_ = std::move(cb); }
-
-    //Tie this channel to the owner object managed by shared_ptr
-    // prevent the owner object beging destroyed in handleEvent
-    // void tie(const std::shared_ptr<void>&);
 
     int fd() const { return fd_; }
 
@@ -90,7 +78,7 @@ public:
 private:
     void update();
 
-    EventLoop *loop_;
+    EventLoop *_loop;
     const int fd_;
     int events_;
     int revents_; //it's the received event types of epoll or poll
@@ -98,7 +86,7 @@ private:
 
     ReadEventCallback readCallback_;
     EventCallback writeCallback_;
-    EventCallback closeCallback_;
+    EventCallback _closeCallback;
     EventCallback errorCallback_;
 };
 

@@ -39,20 +39,5 @@ void Buffer::CopyFrom(const Buffer &b) {
     }
 }
 
-Buffer &Buffer::Absorb(Buffer &b) {
-    if (&b != this) {
-        if (readableSize() == 0) {
-            char buf[sizeof(b)];
-            memcpy(buf, this, sizeof(b));
-            memcpy(this, &b, sizeof(b));
-            memcpy(&b, buf, sizeof(b));
-            std::swap(exp_, b.exp_);
-        } else {
-            append(b.Begin(), b.readableSize());
-            b.Clear();
-        }
-    }
-    return *this;
-}
 
 

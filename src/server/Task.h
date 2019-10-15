@@ -16,15 +16,14 @@ public:
 private:
     void startSubTask();
 
-    T *loop_;
+    T *_loop;
     std::thread thread_;
     std::mutex mutex_;
     std::condition_variable cond_;
 };
 
 template <class T>
-Task<T>::Task() : loop_(nullptr), mutex_(), cond_() {
-//	   printf("LOG_DEBUG: hello from constructor of EventLoopThread\n");
+Task<T>::Task() : _loop(nullptr), mutex_(), cond_() {
 }
 
 template <class T>
@@ -35,19 +34,18 @@ Task<T>::~Task() {
 
 template <class T>
 T *Task<T>::startLoop() {
-	std::function<void()> threadFunc = std::bind(&Task::startSubTask, this);
 
 	//是否用std::move()?
-	thread_ = std::thread(threadFunc);
+	thread_ = std::thread(std::bind(&Task::startSubTask, this));
 	{
 
 		std::unique_lock<std::mutex> locker(mutex_);
 		cond_.wait(locker,
-				[&]() { return loop_ != nullptr; }
+				[&]() { return _loop != nullptr; }
 		);
 
 	}
-	return loop_;
+	return _loop;
 }
 
 template <class T>
@@ -55,7 +53,7 @@ void Task<T>::startSubTask() { //这个函数的工作就是起一个子线程�
 	T loop;
 	{
 		std::unique_lock<std::mutex> locker(mutex_);
-		loop_ = &loop;
+		_loop = &loop;
 		cond_.notify_one();
 	}
 	loop.loop();

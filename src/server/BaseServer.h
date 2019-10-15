@@ -12,11 +12,11 @@ public:
         setWriteCompleteCallback(onWriteComplete);
     }
 
-    void setConnectionCallback(const ConnectionCallback &cb) { connCallback_ = cb; }
+    void setConnectionCallback(const ConnectionCallback &cb) { _connCallback = cb; }
 
-    void setMessageCallback(const MessageCallback &cb) { msgCallback_ = cb; }
+    void setMessageCallback(const MessageCallback &cb) { _msgCallback = cb; }
 
-    void setWriteCompleteCallback(const WriteCompleteCallback &cb) { writeCompleteCallback_ = cb; }
+    void setWriteCompleteCallback(const WriteCompleteCallback &cb) { _writeCompleteCallback = cb; }
 
     void setNewConnectionCallback(const NewConnectionCallback &cb) { newConnectionCallback_ = cb; }
 
@@ -24,14 +24,12 @@ public:
 
     static void onMessage(const SP_TcpConnection &conn, Buffer *buf) { conn->send("BaseServer,重写该方法以自定义自己的请求..."); }
 
-    static void onWriteComplete(const SP_TcpConnection &conn) {
-        conn->shutdown();
-    }
+    static void onWriteComplete(const SP_TcpConnection &conn) { conn->shutdown(); }
 
-protected:
-    ConnectionCallback connCallback_;
-    MessageCallback msgCallback_;
-    WriteCompleteCallback writeCompleteCallback_;
+//protected:
+    ConnectionCallback _connCallback;
+    MessageCallback _msgCallback;
+    WriteCompleteCallback _writeCompleteCallback;
     NewConnectionCallback newConnectionCallback_;
 };
 

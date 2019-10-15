@@ -9,6 +9,7 @@ if [ ! -e ../data/text8 ]; then
   fi
   unzip text8.zip
 #  rm text8.zip
+
 fi
 
 mkdir -p "../build"
@@ -28,7 +29,7 @@ max_size=1e7
 min_count=1
 window=10
 embed_size=100
-epoch=3
+epoch=8
 threads=20
 memory_limit=1
 lr=0.05

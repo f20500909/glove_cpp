@@ -12,7 +12,7 @@ include_directories(data)
 aux_source_directory(data SERVER_DIR)
 
 set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -march=native -O3 -pthread -lpthread -Werror ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++14 -march=native -O3 -pthread -lpthread -Werror ")
 
 find_package(Threads)
 add_executable(server ${SERVER_DIR})

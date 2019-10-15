@@ -36,7 +36,8 @@ typedef std::function<void()> EventCallback;
 typedef std::function<void()> ReadEventCallback;
 typedef std::function<void()> Functor;
 
-typedef std::vector<Channel *> ChannelList;
+typedef std::vector<Channel *> ChannelVec;
+
 typedef std::vector<struct epoll_event> EventVec;
 typedef std::map<int, Channel *> ChannelMap; //sockfd - Channel
 

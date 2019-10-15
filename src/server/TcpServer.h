@@ -6,6 +6,7 @@
 #include <memory>
 #include <functional>
 #include <netinet/tcp.h>
+#include <unordered_map>
 #include "EventLoop.h"
 #include "unit.h"
 #include "Declare.h"
@@ -22,12 +23,10 @@
 * 设置好Callback,再调用conn->connectEstablished(), 其中会回调用户提供的ConnectionCallback
 */
 
-// TODO: add HighWaterCallback: 如果输出缓冲的长度超过用户指定的大小,则触发回调
-
 
 class TcpServer : public BaseServer, public noncopyable {
 public:
-    TcpServer(EventLoop *mainLoop, EventLoopThreadPool *threadPool);
+    TcpServer(EventLoop *mainLoop, ThreadPool *threadPool);
 
     ~TcpServer();
 
@@ -41,16 +40,16 @@ private:
     void removeConnectionInLoop(const SP_TcpConnection &conn);
 
     void AcceptorHandleRead();
-    void acceptorListen();
 
-    int _acceptSocket;
+    int _mainSocket;
     int nextConnId_;
 
-    ConnectionMap map;
+//    ConnectionMap map;
+    std::unordered_map<std::string, SP_TcpConnection> connectionMap;
 
     EventLoop *mainLoop;
-    EventLoopThreadPool *threadPool_;
-    Channel acceptChannel_;
+    ThreadPool *threadPool_;
+    Channel _mainChannel;
 };
 
 

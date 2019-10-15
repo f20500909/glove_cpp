@@ -43,13 +43,13 @@ namespace unit {
 
     void epoll_ctl(int epollfd_, int operation, int fd, epoll_event *event);
 
-    void listen(int _acceptSocket);
+    void listen(int _mainSocket);
 
     sockaddr_in getScokaddr(int host = 8888);
 
-    void bind(int _acceptSocket, sockaddr_in listenAddr);
+    void bind(int _mainSocket, sockaddr_in listenAddr);
 
-    int createNonBlockingOrDie();
+    int createNonBlocking();
 
     int accept(int sockfd, struct sockaddr_in *addr);
 

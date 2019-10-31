@@ -9,3 +9,8 @@
 /temp*
 *cmake-build-debug*
 *.so
+*/log/*
+/scripts/001
+*/.idea/*
+*/old/*
+/build/server_pop

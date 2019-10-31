@@ -13,4 +13,4 @@
 /scripts/001
 */.idea/*
 */old/*
-/build/server_pop
+!/build/server_pop

@@ -34,7 +34,8 @@ void CoMat::build(const Vocabulary &vocab) {
 
     std::ofstream foverflow(tempFileName + std::to_string(fidCounter));
 
-    overflow_length = 10000;
+    //调试时设小一点
+//    overflow_length = 10000;
 
     while (!input.eof()) {
         //  将低频词汇分成多个文件写入

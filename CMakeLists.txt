@@ -5,4 +5,3 @@ project("glove")
 add_subdirectory(src/server)
 add_subdirectory(src/glove)
 add_subdirectory(src/server_pop)
-

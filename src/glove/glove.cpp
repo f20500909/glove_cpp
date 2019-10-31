@@ -25,7 +25,7 @@ Glove::Glove() {
 
 };
 
-void Glove::run(std::string input_file) {
+void Glove::train(std::string input_file) {
     this->input_file = input_file;
 
     TRACE("====================================================== ","\n");

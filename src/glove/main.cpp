@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
     Glove glove = Glove();
 
     if (args_cmd.size() > 1) glove.parseArgs(args_cmd);
-    glove.run(glove.input_file);
+    glove.train(glove.input_file);
 
 //    glove.load("log/vocab.txt", "log/wordvec.txt", "log/wordvec.txt.meta");
     glove.to_txt();

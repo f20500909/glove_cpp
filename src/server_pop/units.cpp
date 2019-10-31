@@ -216,6 +216,33 @@ namespace units {
         return evtfd;
     }
 
+    int MyDaemonize() {
+        //创建子进程,关闭父进程
+        int pid =fork();
+        if(pid>0){
+            exit(EXIT_SUCCESS);
+        }
+        if(pid==-1)
+            return -1;
+        //设置新会话
+        if(setsid()<0){
+            perror("setsid err....\n");
+            return -1;
+        }
+
+        for(int i=0;i<NOFILE;i++){
+            close(i);
+        }
+        //更改目录
+        chdir("/");
+        //设置文件掩码
+        umask(0);
+
+        //忽略SIGCHLD信号
+        signal(SIGCHLD,SIG_IGN);
+        return 0;
+    }
+
 
 }
 

@@ -14,7 +14,7 @@ import os
 import subprocess
 import platform
 
-__version__ = '0.1.9'
+__version__ = '0.2.3'
 SRC = "src"
 
 
@@ -166,10 +166,9 @@ setup(
     long_description_content_type="text/markdown",
     ext_modules=ext_modules,
     url='https://github.com/f20500909/glove_py',
-    license='MIT',
     classifiers=['Programming Language :: Python :: 3', ],
     install_requires=['pybind11>=2.2', "setuptools >= 0.7.0", "numpy"],
-    cmdclass={'build_ext': BuildExt},
+    # cmdclass={'build_ext': BuildExt},
     packages=["glove", "glove.pybind", ],
     # package_dir表示一种映射关系,此处表示包的根目录为当前的python文件夹
     package_dir={'': 'python'},

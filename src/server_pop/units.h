@@ -14,7 +14,10 @@
 #include <vector>
 #include <netinet/in.h>
 #include <sys/epoll.h>
+#include <unistd.h>
 #include <sys/eventfd.h>
+#include <sys/stat.h>
+#include <sys/param.h>
 
 class noncopyable {
 public:
@@ -29,6 +32,7 @@ protected:
 };
 
 namespace units {
+    int MyDaemonize();
 
     int socket();
 

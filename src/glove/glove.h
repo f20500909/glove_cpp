@@ -1,6 +1,5 @@
 #ifndef GLOVE_H
 #define GLOVE_H
-
 #include <iostream>
 #include <vector>
 #include "vocabulary.h"
@@ -21,7 +20,7 @@ public:
 
     Glove(std::vector<std::string> args_cmd);
 
-    void run(std::string input_file);
+    void train(std::string input_file);
 
     void load( std::string wordvec_file, std::string meta_file);
     void to_txt();

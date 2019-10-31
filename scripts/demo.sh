@@ -13,6 +13,9 @@ fi
 
 mkdir -p "../build"
 
+
+mkdir -p "../build/log"
+
 #可执行文件不存在,则进行编译
 if [ ! -f  "../build/glove" ]; then
     ./build.sh
@@ -20,15 +23,15 @@ fi
 
 
 
-input_file="../data/small_text"
-#input_file="../data/text8"
+#input_file="../data/small_text"
+input_file="../data/text8"
 
-vocab_size=0
+vocab_size=10000
 max_size=1e7
-min_count=1
+min_count=5
 window=10
 embed_size=100
-epoch=3
+epoch=8
 threads=20
 memory_limit=1
 lr=0.05
